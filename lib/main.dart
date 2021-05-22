@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 import 'AdminScreen.dart';
 import 'UserScreen.dart';
-
+String ip = "192.168.0.6";
 class EnterForm extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MyFormState();
@@ -46,23 +46,26 @@ class MyFormState extends State {
               new ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    http.post('http://192.168.1.42:8080/user',
+                    http.post('http://192.168.0.6:8080/user',
                         headers: {'name': username},
                         body: {'name': username}).then((response) {
                       if (response.statusCode == 200) {
-                        log(response.body.split(" ")[0] + response.body.split(" ")[1]);
+                        log(response.body.split(" ")[0] +
+                            response.body.split(" ")[1]);
                         switch (response.body.split(" ")[1]) {
                           case "1":
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AdminScreen()));
+                                    builder: (context) => AdminScreen(int.parse(
+                                        response.body.split(" ")[0]))));
                             break; //TODO Это админ
                           case "2":
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UserScreen()));
+                                    builder: (context) => UserScreen(int.parse(
+                                        response.body.split(" ")[0]))));
                             break; //TODO Это обычный работяга
                         }
                       } else {
@@ -76,7 +79,8 @@ class MyFormState extends State {
                     });
                     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
                       content: new Text("Вход произведен!"),
-                      backgroundColor: Colors.green, duration: Duration(seconds: 1),
+                      backgroundColor: Colors.green,
+                      duration: Duration(seconds: 1),
                     ));
                   }
                 },
