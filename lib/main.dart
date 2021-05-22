@@ -50,20 +50,20 @@ class MyFormState extends State {
                         headers: {'name': username},
                         body: {'name': username}).then((response) {
                       if (response.statusCode == 200) {
-                        log(response.body);
-                        switch (response.body) {
+                        log(response.body.split(" ")[0] + response.body.split(" ")[1]);
+                        switch (response.body.split(" ")[1]) {
                           case "1":
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UserScreen()));
-                            break; //TODO Это обычный пользователь
+                                    builder: (context) => AdminScreen()));
+                            break; //TODO Это админ
                           case "2":
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => AdminScreen()));
-                            break; //TODO Это контролер
+                                    builder: (context) => UserScreen()));
+                            break; //TODO Это обычный работяга
                         }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
