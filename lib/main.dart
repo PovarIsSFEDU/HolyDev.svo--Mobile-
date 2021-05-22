@@ -7,7 +7,9 @@ import 'package:http/http.dart' as http;
 
 import 'AdminScreen.dart';
 import 'UserScreen.dart';
-String ip = "192.168.0.6";
+
+String ip = "192.168.1.42";
+
 class EnterForm extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MyFormState();
@@ -46,7 +48,7 @@ class MyFormState extends State {
               new ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    http.post('http://192.168.0.6:8080/user',
+                    http.post('http://192.168.1.42:8080/user',
                         headers: {'name': username},
                         body: {'name': username}).then((response) {
                       if (response.statusCode == 200) {
