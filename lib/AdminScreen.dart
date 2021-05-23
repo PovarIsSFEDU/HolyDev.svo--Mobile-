@@ -114,7 +114,7 @@ class _UserScreenState extends State<AdminScreen> {
               style: TextStyle(fontSize: 25),
             ),
             Text(
-              "проверяющий: " + o.checker_id.toString(),
+              "проверяющий: Вы", //+ o.checker_id.toString(),
               style: TextStyle(fontSize: 25),
             ),
             Text(
